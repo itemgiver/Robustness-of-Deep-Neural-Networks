@@ -12,14 +12,42 @@ Recent studies showed that we can increase the robustness of DNN models by apply
 
 ## Usage
 
-The experiments can be conducted with the following command and all the experiment configurations are handled by config file (check `configs/`).
+The experiments can be conducted with the following command and all the experiment configurations are handled by the config file (check `configs/`).
 
 ```
 python main.py configs/{config_file}.json
 ```
 
-Agent is chosen from the config file in the argument and corresponding agent's `run()` procedure is called.
+An agent is chosen from the config file in the argument and the corresponding agent's `run()` procedure is called.
 After `run()` procedure is done, agent's `finalize()` procedure is called.
+
+## Experiments
+
+We newly implemented code for SENSEI that is an automatic data augmentation framework for DNNs. Then we conducted three experiments to see whether the performance of our re-implementation follows the trends shown in the original paper. All of our experimental results can be found in the following link.
+https://tensorboard.dev/experiment/hRrnCQ0PRyaATOyBojoWbQ/#scalars
+
+### 1. Reproducing the results of the paper experiment
+
+We verify the implementation of our framework by observing the performance of the ResNet-50 model involving three different data-augmenting strategies: RANDOM (blue), W-10 (orange), and SENSEI (green). A plain model training without applying data augmentation (red) represents the baseline for all other strategies.
+
+![image](https://user-images.githubusercontent.com/87184009/147414889-6de03247-f3ce-4ce3-9cdc-42bf328fd50e.png)
+
+### 2. Robustness of the Framework
+
+Repetition of Experiment 1 with another implementation of ResNet-50. We utilize the API from an open-source library, torchvision, to instantiate any neural network model, including ResNet-50, that is provided in the model zoo of the library.
+
+![image](https://user-images.githubusercontent.com/87184009/147415242-e1b69571-98f2-4732-a96b-79394463a38a.png)
+
+### 3. Extension to Genetic Algorithm
+
+Performance comparison using different data-augmenting strategies including two of our proposed variants: SENSEI-RW and SENSEI-T which modify the selection method of the genetic algorithm
+
+![image](https://user-images.githubusercontent.com/87184009/147415225-1ef89e9e-2244-4df6-a789-1e91079661b7.png)
+
+## Discussion
+
+Discussions of the results can be found in our final report. \
+https://github.com/itemgiver/Robustness-of-Deep-Neural-Networks/blob/main/CS454_Final_Project.pdf
 
 ## References
 
